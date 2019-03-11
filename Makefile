@@ -174,7 +174,9 @@ UPROGS=\
 	_kill\
 	_ln\
 	_ls\
+	_mergesort\
 	_mkdir\
+	_quicksort\
 	_rm\
 	_sh\
 	_stressfs\
@@ -251,6 +253,7 @@ EXTRA=\
 	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
 	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
 	printf.c umalloc.c\
+	mergesort.c quicksort.c\
 	README dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
 	.gdbinit.tmpl gdbutil\
 

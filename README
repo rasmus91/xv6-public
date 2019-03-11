@@ -1,3 +1,17 @@
+NOTICE:
+This is not the original repository. That you may find here: https://github.com/mit-pdos/xv6-public 
+This is a fork, made for me to personally handle hands on assignments, following the fourth semester course: Operating Systems and Concurrency, using: Operating Systems, three easy parts as the text book,
+on Aalborg University. I decided to make a public repo, with a fork of the XV6 repo, containing otherwise, only the changes I have made myself.
+In case of existing XV6 files, these are noted with a comment //Custom changes to... and ended with another such, or so i will aim to. 
+Otherwise, the files are bound to have a small copyright notice, but are otherwise licensed the same as the XV6 project. Do not remove the copyright notice from significant parts
+of the program. 
+
+Otherwise, I would like to add a small 'thank you' for the creators of XV6, as well as our Professor: René Rydhof Hansen, both parties contributing to make this
+course a very entertaining as well as educational one: few things helps the understanding better than good teaching followed by firstclass hands on.
+
+The following is the original contents of this file:
+
+
 xv6 is a re-implementation of Dennis Ritchie's and Ken Thompson's Unix
 Version 6 (v6).  xv6 loosely follows the structure and style of v6,
 but is implemented for a modern x86-based multiprocessor using ANSI C.

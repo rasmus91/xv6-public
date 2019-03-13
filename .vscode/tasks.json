@@ -7,6 +7,11 @@
             "label": "build",
             "type": "shell",
             "command": "make"
+        },
+        {
+            "label": "qemu",
+            "type": "shell",
+            "command": "make qemu"
         }
     ]
 }

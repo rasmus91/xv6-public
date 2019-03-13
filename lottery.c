@@ -1,3 +1,7 @@
+/*
+    Copyright (C) 2019 Rasmus Lindegaard
+*/
+
 #include "lottery.h"
 
 #include "user.h"
@@ -13,7 +17,7 @@ struct priority_proc{
 };
 
 struct{
-    struct priority_proc procs[320];
+    struct priority_proc procs[TICKET_COUNT];
     int last_index;
 } tickets;
 
@@ -21,7 +25,7 @@ struct{
 
 struct {
     struct priority_proc procs[NPROC];
-} proc_priorities;
+} proc_ticket_priorities;
 
 
 
@@ -30,13 +34,37 @@ struct proc* extract(void);
 int calc_left_child(int index);
 int calc_right_child(int index);
 int calc_parent(int index);
-double random(double base, double bound);
+double random();
+double get_proc_priority_weight(double priority);
 
+double get_proc_priority_weight(double priority)
+{
+    double total = 0.0;
+    for(int i = 0; i < NPROC; i++)
+    {
+        if(proc_ticket_priorities.procs[i].process->state == RUNNABLE)
+        {
+            total += proc_ticket_priorities.procs[i].priority;
+        }
+    }
 
+    return (100 / total) * priority;
+}
+
+void assign_proc_priorities(struct proc procs[])
+{
+    static int call_counter = 0;
+
+    for(int i = 0; i < NPROC; i++)
+    {
+        proc_ticket_priorities.procs[i].priority = 5;
+        proc_ticket_priorities.procs[i].process = &procs[i];
+    }
+}
 
 void build_heap(struct proc procs[], int length)
 {
-    //Read init 
+    
 
     for(int i = (TICKET_COUNT >> 1); i > 0; i--)
     {
@@ -87,11 +115,33 @@ struct proc* extract(void)
 
 int calc_left_child(int index)
 {
-    return (index << 1) + 1
+    return (index << 1) + 1;
 }
-int calc_right_child(int index);
-int calc_parent(int index);
-double random(double base, double bound);
+
+int calc_right_child(int index)
+{
+    return (index << 1) + 2;
+}
+
+int calc_parent(int index)
+{
+    if(index % 2 > 0)
+    {
+        index -= 1;
+    }
+    else
+    {
+        index -= 2;
+    }
+    
+    return index >> 1;
+}
+
+double random()
+{
+    double result = uptime() / (uptime() << 2);
+    result += ((uptime() % 17) * 0.314581) + ((uptime() << 3) / (uptime() * 0.0019453));
+}
 
 void lottery_scheduler()
 {
